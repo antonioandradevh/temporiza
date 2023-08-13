@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #362073;
+  }
+  
+  .timer-container {
+    color: snow;
+    text-align: center;
+    background-color: #18144F;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+ 
+  
+  #timerDisplay {
+    font-size: 36px;
+    margin-top: 10px;
+  }
+  .timer-container button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: snow;
+    display: block;
+    margin: 0 auto;
+    margin-top: 25px;
+    padding: 25px;
+    border: none;
+    border-radius: 50px;
+    background-color: #283785;
+  }
+  .timer-container button:hover{
+    background-color: #212b5c;
+  }
+  .timer-container input{
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    border: none;
+    font-size: 20px;
+    border-radius: 50px;
+    padding: 10px;
+  }
+  .timer-container input::-webkit-outer-spin-button,
+  .timer-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  }
+  .timer-container input[type=number] {
+    -moz-appearance: textfield;
+  }
