@@ -48,7 +48,7 @@ function updateTimeDisplay(seconds) {
   
     const displayText = [displayMinutes, displaySeconds].filter(Boolean).join(' e ');
     timerDisplay.textContent = displayText;
-    document.title = `${displayText} - Temporizador`;
+    document.title = `${displayText}`;
   }
   
 
