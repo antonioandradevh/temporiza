@@ -30,6 +30,8 @@ function startTimer() {
     } else {
       clearInterval(countdown);
       playAlarm();
+      pauseButton.style.display = 'none';
+      stopAlarmButton.style.display = 'block';
     }
   }, 1000);
 }
@@ -47,7 +49,28 @@ function pauseTimer() {
   stopAlarmButton.style.display = 'block';
 }
 
-// Restante do código
+function playAlarm() {
+  alarmSound.play();
+}
+
+function stopAlarm() {
+  alarmSound.pause();
+  alarmSound.currentTime = 0;
+  stopAlarmButton.style.display = 'none';
+  pauseButton.style.display = 'block';
+  timerDisplay.textContent = '';
+  timeInput.disabled = false;
+}
+
+timeInput.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+    if (startButton.style.display === 'none') {
+      pauseTimer();
+    } else {
+      startTimer();
+    }
+  }
+});
 
 startButton.addEventListener('click', startTimer);
 pauseButton.addEventListener('click', pauseTimer);
