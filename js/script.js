@@ -1,79 +1,54 @@
-// script.js
 const startButton = document.getElementById('startButton');
-const cancelButton = document.getElementById('cancelButton');
+const pauseButton = document.getElementById('pauseButton');
 const stopAlarmButton = document.getElementById('stopAlarmButton');
 const timeInput = document.getElementById('time');
 const timerDisplay = document.getElementById('timerDisplay');
 let countdown;
 let alarmSound = new Audio('alarm.mp3');
+let remainingTime;
 
 function startTimer() {
-    const minutes = parseInt(timeInput.value, 10);
-    if (isNaN(minutes) || minutes <= 0) {
-      alert('Insira um tempo válido!');
-      return;
-    }
-  
-    const totalSeconds = minutes * 60;
-  
-    startButton.style.display = 'none';
-    cancelButton.style.display = 'block';
-    timeInput.disabled = true;
-    stopAlarmButton.style.display = 'none';
-  
-    let remainingTime = totalSeconds;
-  
-    countdown = setInterval(() => {
-      remainingTime--;
-      if (remainingTime >= 0) {
-        updateTimeDisplay(remainingTime);
-      } else {
-        clearInterval(countdown);
-        playAlarm();
-      }
-    }, 1000);
+  const minutes = parseInt(timeInput.value, 10);
+  if (isNaN(minutes) || minutes <= 0) {
+    alert('Insira um tempo válido!');
+    return;
   }
-  timeInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      startTimer();
+
+  const totalSeconds = minutes * 60;
+
+  startButton.style.display = 'none';
+  pauseButton.style.display = 'block';
+  timeInput.disabled = true;
+  stopAlarmButton.style.display = 'none';
+
+  remainingTime = totalSeconds;
+
+  countdown = setInterval(() => {
+    remainingTime--;
+    if (remainingTime >= 0) {
+      updateTimeDisplay(remainingTime);
+    } else {
+      clearInterval(countdown);
+      playAlarm();
     }
-  });  
-
-function updateTimeDisplay(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const secondsToShow = seconds % 60;
-    
-    const displayMinutes = minutes > 0 ? `${minutes} minuto${minutes !== 1 ? 's' : ''}` : '';
-    const displaySeconds = secondsToShow > 0 ? `${secondsToShow} segundo${secondsToShow !== 1 ? 's' : ''}` : '';
-  
-    const displayText = [displayMinutes, displaySeconds].filter(Boolean).join(' e ');
-    timerDisplay.textContent = displayText;
-    document.title = `${displayText}`;
-  }
-  
-
-function resetTimer() {
-  startButton.style.display = 'block';
-  cancelButton.style.display = 'none';
-  timeInput.disabled = false;
-  timerDisplay.textContent = '';
+  }, 1000);
 }
 
-function playAlarm() {
-  alarmSound.play();
+function updateTimeDisplay(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secondsToShow = seconds % 60;
+  timerDisplay.textContent = `${minutes}:${secondsToShow < 10 ? '0' : ''}${secondsToShow}`;
+}
+
+function pauseTimer() {
+  clearInterval(countdown);
+  startButton.style.display = 'block';
+  pauseButton.style.display = 'none';
   stopAlarmButton.style.display = 'block';
 }
 
-function stopAlarm() {
-  alarmSound.pause();
-  alarmSound.currentTime = 0;
-  stopAlarmButton.style.display = 'none';
-  resetTimer();
-}
+// Restante do código
 
 startButton.addEventListener('click', startTimer);
-cancelButton.addEventListener('click', () => {
-  clearInterval(countdown);
-  stopAlarm();
-});
+pauseButton.addEventListener('click', pauseTimer);
 stopAlarmButton.addEventListener('click', stopAlarm);
