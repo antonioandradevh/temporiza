@@ -13,6 +13,32 @@ function startTimer() {
     alert('Insira um tempo válido!');
     return;
   }
+  
+function loadTimerFromLocalStorage() {
+  const savedTime = localStorage.getItem('remainingTime');
+  if (savedTime !== null) {
+    remainingTime = parseInt(savedTime, 10);
+    if (!isNaN(remainingTime)) {
+      updateTimeDisplay(remainingTime);
+      if (remainingTime > 0) {
+        startButton.style.display = 'none';
+        pauseButton.style.display = 'block';
+        stopAlarmButton.style.display = 'none';
+        countdown = setInterval(() => {
+          remainingTime--;
+          if (remainingTime >= 0) {
+            updateTimeDisplay(remainingTime);
+          } else {
+            clearInterval(countdown);
+            playAlarm();
+            pauseButton.style.display = 'none';
+            stopAlarmButton.style.display = 'block';
+          }
+        }, 1000);
+      }
+    }
+  }
+}
 
   const totalSeconds = minutes * 60;
 
