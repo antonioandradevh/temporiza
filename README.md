@@ -4,6 +4,7 @@ Este é um simples projeto de um temporizador em HTML, CSS e JavaScript, que per
 
 ## Funcionalidades
 
+- Acesse o site[https://antonioandradevh.github.io/temporiza/]
 - Escolha um tempo em minutos no campo de entrada.
 - Inicie o temporizador pressionando o botão "Iniciar" ou a tecla Enter.
 - O temporizador será exibido na tela e atualizado a cada segundo.
